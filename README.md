@@ -2,19 +2,19 @@
 
 
  
-## NAME:
+## NAME: ARJUN K
 
-## DEPARTMENT:
+## DEPARTMENT:CSE
 
-## ROLL NO:
+## ROLL NO:212224040028
 
-## DATE OF EXPERIMENT:
+## DATE OF EXPERIMENT:03-03-2025
 
-## AIM
+## AIM:
 
 To interface multiple switches with the Raspberry Pi Pico and control LEDs using MicroPython.
 
-## APPARATUS REQUIRED
+## APPARATUS REQUIRED:
 
 Raspberry Pi Pico
 
@@ -30,7 +30,7 @@ Jumper Wires
 
 USB Cable
 
-## THEORY
+## THEORY:
 
 
 
@@ -63,29 +63,51 @@ Connect LED 2 to GP17 via a 330Ω resistor.
 
 Connect the other terminals of the switches to GND.
 
-## PROGRAM (MicroPython)
-''''
+## PROGRAM (MicroPython):
+```
+from machine import Pin
+from time import sleep
+switch1=Pin(2,Pin.IN)
+switch2=Pin(3,Pin.IN)
+led1 = Pin(15,Pin.OUT)
+led2 = Pin(16,Pin.OUT)
+while True:
+    sw1_state = switch1.value()
+    sw2_state = switch2.value()
+    print("switch 1 state:",sw1_state)
+    print("switch 2 state:",sw2_state)
+    led1.value(0)
 
+    if sw1_state== 1 and sw2_state== 1:
+        led1.value(0)
+        led2.value(0)
 
+    elif sw1_state== 1:
+        led1.value(1)
+        sleep(0.5)
+        led1.value(0)
+        led2.value(0)
 
- 
+    elif sw2_state== 1:
+        led1.value(0)
+        led2.value(1)
+        sleep(0.5)
+        led2.value(0)
 
-## OUTPUT
+    sleep(0.5)
 
-
-
-FIGURE-02: CIRCUIT CONNECTION
-
-FIGURE-03: CODE EXECUTION OUTPUT
-
-FIGURE-04: LED STATUS BASED ON SWITCH INPUTS
-## TIMING DIGAGRAM 
-
-
-UPLOAD YOUR TIMING DIGARAM HERE 
-
-
-
+```
+## OUTPUT:
+Output 1(0-0):
+![Screenshot 2025-03-03 105439](https://github.com/user-attachments/assets/140b7896-2fd9-449a-ae31-42f2d8fd2811)
+Output 2(1-0):
+![Screenshot 2025-03-03 105510](https://github.com/user-attachments/assets/328fb852-a3b4-4fea-ad8d-fa441e77e7dd)
+Output 3(0-1):
+![Screenshot 2025-03-03 105527](https://github.com/user-attachments/assets/06140e87-4f20-4b2b-b2de-180527348f5b)
+Output 4(1-1):
+![Screenshot 2025-03-03 105642](https://github.com/user-attachments/assets/f5e45f77-14bc-465f-8dc8-12cb550d652d)
+## TIMING DIGAGRAM :
+![edge exp2](https://github.com/user-attachments/assets/8f50470e-7004-417b-a47a-696512b3435e)
 ## RESULTS
 
 The multiple switches connected to the Raspberry Pi Pico successfully controlled the LEDs based on their states, confirming the proper interfacing of digital inputs and outputs.
